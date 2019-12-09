@@ -46,7 +46,7 @@ class VO2max:
         HRrest= int(input("Your resting heart rate: ")) 
         return round(15*(HRmax/HRrest), 2)
 
-# Start Program
+# Program Starts here
 if __name__ == "__main__":
     # age in years
     age= int(input("Enter Age: "))
