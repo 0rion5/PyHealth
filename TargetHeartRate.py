@@ -165,7 +165,8 @@ class TargetHeartRate:
         # return the target heart rate
         return round(((HRmax - HRresting)*percent//100) + HRresting)
     
-    def heart_rate_reserve(HRmax, HRresting): 
+    def heart_rate_reserve(age, HRresting):
+        HRmax = 220-age
         return HRmax - HRresting
     
     
@@ -260,6 +261,6 @@ if __name__ == "__main__":
         
         print("""\nYour target heart rate is : {} bpm
 Intensity Level           : {}
-Target High (85% of HRmax): {} bpm
-Target Low  (50% of HRmax): {} bpm
+Target High (85% of HRR): {} bpm
+Target Low  (50% of HRR): {} bpm
 Vo2Max                    : {} ml/kg/min""".format(targetBPM, intensity_rating, target_high, target_low,vo2max))
