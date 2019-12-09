@@ -6,7 +6,7 @@ Created on Sun Dec  8 12:21:07 2019
 
 """
 
-class VO2max:
+class Vo2Max:
     
     def __init__(self,age,gender,weight,walk_time_mins,heart_rate):
         self.age= age
@@ -15,10 +15,9 @@ class VO2max:
         self.walk_time_mins= walk_time_mins
         self.heart_rate= heart_rate
     
-    vo2max= lambda a,g,w,wtm,hr : 132.853-(0.0769 * w)-(0.3877 * a)+(6.315 * g)\
-    -(3.2649 * wtm)-(0.156 * hr)    
+    vo2max= lambda a,g,w,wtm,hr : 132.853-(0.0769 * w)-(0.3877 * a)+(6.315 * g)-(3.2649 * wtm)-(0.156 * hr)    
     
-    def VO2max(age,gender,weight,walk_time_mins,heart_rate):
+    def Vo2max(age,gender,weight,walk_time_mins,heart_rate):
         
         """
         Calculate your VO2 max using the following equation: 
@@ -71,4 +70,4 @@ if __name__ == "__main__":
     # heart rate
     heart_rate= int(input("heart rate: "))
     
-    VO2max= VO2max.VO2max(age,gender,weight,walk_time_mins,heart_rate)
+    VO2max= Vo2Max.vo2max(age,gender,weight,walk_time_mins,heart_rate)
