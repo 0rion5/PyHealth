@@ -49,7 +49,7 @@ class TargetHeartRate:
         """
         This function uses the Karvonen method of determining the optimal target heart rate.
         As compared to HRmax, for which the range is 55% to 90%, when using 
-        this method to dtermine intensity, targetHRs during cardiorespiratory 
+        this method to determine intensity, targetHRs during cardiorespiratory 
         training should fall between 50% to 85% of HRR.
         this is to Ensure the target HR is not overestimated
         """
