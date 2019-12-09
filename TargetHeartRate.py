@@ -7,8 +7,8 @@
 """
 
 low    = range(1,  66)
-medium = range(67, 78)
-high   = range(79, 91)
+medium = range(67, 79)
+high   = range(79, 101)
 
 intensity_dict= {
         low    : "low intensity"   ,
