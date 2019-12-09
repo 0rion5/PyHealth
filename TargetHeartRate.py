@@ -24,7 +24,7 @@ class TargetHeartRate:
    
     # Class methods to call from other programs when importing
     hr_max= lambda age,percent: (220-age)*percent//100
-    karvonen_hr= lambda age, restingHR, percentage: (((220-age) - restingHR)*percentage//100) + restingHR
+    karvonen_hr= lambda age, restingHR, percentage: (((207-(0.7*age)) - restingHR)*percentage//100) + restingHR
     
     
     # HRmax Method
