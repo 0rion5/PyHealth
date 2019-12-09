@@ -10,16 +10,9 @@ Desciption: Harris-Benedict Equation for estimating Basal metabolic Rate
 
 
 class BasalMetabolicRate:
-    
-    
-    def __init__(self, weight, height, age):
-        self.weight = weight
-        self.height = height
-        self.age    = age
+            
+    __doc__ = """
         
-    
-    def __doc__(self):
-        """
         Equation to Calculate Your BMR
 
         The Harris-Benedict Equation is often used to estimate basal metabolic rate.
@@ -27,7 +20,13 @@ class BasalMetabolicRate:
         Men:  BMR = 88.362 + (13.397 x weight in kg) + (4.799 x height in cm) - (5.677 x age in years)
         Women: BMR = 447.593 + (9.247 x weight in kg) + (3.098 x height in cm) - (4.330 x age in years)
 
-        """
+             """
+        
+        
+    def __init__(self, weight, height, age):
+        self.weight = weight
+        self.height = height
+        self.age    = age
         
     
     WOMEN= lambda x,y,z: round(447.593 + 9.247*x + 3.098*y - 4.330*z, 2)
