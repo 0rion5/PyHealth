@@ -6,14 +6,14 @@
 
 """
 
-low= range(1,72)
-medium= range(72,83)
-high= range(83,91)
+low    = range(1,  66)
+medium = range(67, 78)
+high   = range(79, 91)
 
 intensity_dict= {
-        low    : "low"   ,
-        medium : "medium",
-        high   : "high"
+        low    : "low intensity"   ,
+        medium : "medium intensity",
+        high   : "high intensity"
         }
 
 class TargetHeartRate:
@@ -55,10 +55,13 @@ class TargetHeartRate:
         """
        
         # define heart rate maximum
-        HRmax = 220 - age
+        HRmax =  207-(0.7*age)
         
         # return the target heart rate
-        return ((HRmax - restingHR)*percent//100) + restingHR 
+        return round(((HRmax - restingHR)*percent//100) + restingHR)
+    
+    def heart_rate_reserve(HRmax, restingHR): 
+        return HRmax - restingHR
     
     
     # Get VO2 Max
@@ -78,23 +81,26 @@ class TargetHeartRate:
 
 
     def target_high(age, restingHR):
-        
-        return TargetHeartRate.karvonen(age, restingHR, 90)
+        return TargetHeartRate.karvonen(age, restingHR, 85)
+
     def target_low(age, restingHR):
-        return TargetHeartRate.karvonen(age, restingHR, 55)
+        return TargetHeartRate.karvonen(age, restingHR, 50)
+
+    def target_min(HRreserve,RHR):
+        return HRreserve*0.5 +RHR
     
-    target_avg = lambda num_1, num_2 : (num_1 + num_2)/2
+    target_avg = lambda x, y : (x+y)/2
         
         
 
 # Program Starts Here
 if __name__ == "__main__":
     
-    restingHR= int(input("Resting heart rate: "))
-    age= int(input("Age : "))
+    restingHR= int(input("What is your resting heart rate? "))
+    age= int(input("How old are you? "))
     target_high= TargetHeartRate.target_high(age, restingHR)
     target_low= TargetHeartRate.target_low(age, restingHR)
-    intensity= int(input("Target intensity 55-90%: "))
+    intensity= int(input("What is your target intensity 50-85%? "))
     
     for keys in intensity_dict.keys():
         if intensity in keys:
@@ -104,11 +110,9 @@ if __name__ == "__main__":
     vo2max= TargetHeartRate.vo2_max(age, restingHR)    
     target_high= TargetHeartRate.target_high(age, restingHR)
     target_low= TargetHeartRate.target_low(age, restingHR)
-    target_avg = int(TargetHeartRate.target_avg(target_high,target_low))
     
-    print("""Your target heart rate is : {}bpm
-Intensity: {}
-Target High (90% of HRmax): {}bpm
-Target Low  (55% of HRmax): {}bpm 
-Target Average            : {}bpm""".format(targetBPM, intensity_rating, target_high, target_low, target_avg))
+    print("""\nYour target heart rate is : {} bpm
+Intensity Level           : {}
+Target High (85% of HRmax): {} bpm
+Target Low  (50% of HRmax): {} bpm""".format(targetBPM, intensity_rating, target_high, target_low))
     
