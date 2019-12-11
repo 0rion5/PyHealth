@@ -3,7 +3,7 @@
 @author: 0rion
 """
 
-# Create function inside class object
+# Define Vo2 max
 def vo2max(age, HRrest):
     """Calculates vo2max"""
     HRmax= lambda x: 220-x 
@@ -17,6 +17,7 @@ def main():
     # Resting heart rate
     HRrest= int(input("Resting heart rate? "))
     VO2MAX= vo2max(age,HRrest)
+    print("{VO2MAX} ml/kg/min")
     return VO2MAX
 
 
