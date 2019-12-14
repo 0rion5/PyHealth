@@ -54,7 +54,6 @@ class PyHealth:
         VO2max= Vo2Max.Vo2Max.vo2max(age, gender,weight,walk_time_mins, heart_rate)
         return  VO2max
 #%%
-#%%
 def menu(): 
    while True:       
        PyHealth_dict= {
@@ -75,7 +74,6 @@ def menu():
        else:
            return menu()
 #%%
-#%%
 def yes_no(user_input):   
     option= lambda x: x[0:1].lower()   
     while True:
@@ -90,10 +88,8 @@ def yes_no(user_input):
             # Return yes_no() function
             return yes_no(input("Continue? Y/n: "))
 #%%
-#%%
 def main():
     return setup()
-#%%
 #%%
 def setup():
     menu_option= menu()
@@ -124,11 +120,9 @@ def setup():
                     PyHealth.setup()
     else:setup()
 #%%
-#%%
 def destroy():
     import sys
     sys.exit()
-#%%
 #%%
 def initialize():
     import time
@@ -222,4 +216,4 @@ try:
 except KeyboardInterrupt:
     
     
-    destroy()
+   
