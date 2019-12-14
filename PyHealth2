@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Dec 13 13:13:00 2019
+
+@author: dalikali
+"""
+#%%
+import sys
+
+def setup():
+    pass
+def main():
+    pass
+def destory():
+    sys.exit()
+
+#%%
+
+#%%
+try:
+    if __name__ == "__main__":
+        setup()
+        main()
+    else:
+        destroy()
+except KeyboardInterrupt:
+    destroy()
+#%%
+
+
+
+
+
+

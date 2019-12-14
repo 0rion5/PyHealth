@@ -1,0 +1,269 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Dec 11 00:00:42 2019
+
+@author: 0rion
+
+Reference URL: 'https://en.wikipedia.org/wiki/Basal_metabolic_rate'
+
+
+Description: 
+
+The body's generation of heat is known as thermogenesis and it can be measured 
+to determine the amount of energy expended. BMR generally decreases with age, 
+and with the decrease in lean body mass (as may happen with aging). 
+
+Increasing muscle mass has the effect of increasing BMR. 
+Aerobic (resistance) fitness level, a product of cardiovascular exercise, 
+while previously thought to have effect on BMR, has been shown in the 1990s 
+not to correlate with BMR when adjusted for fat-free body mass.
+[citation needed] But anaerobic exercise does increase resting energy 
+consumption (see "aerobic vs. anaerobic exercise").[5]
+ 
+Illness, previously consumed food and beverages, environmental temperature, 
+and stress levels can affect one's overall energy expenditure as well as 
+one's BMR.
+
+
+Indirect calorimetry laboratory with canopy hood (dilution technique)
+BMR is measured under very restrictive circumstances when a person is awake. 
+An accurate BMR measurement requires that the person's sympathetic nervous 
+system not be stimulated, a condition which requires complete rest. 
+A more common measurement, which uses less strict criteria, is resting 
+metabolic rate (RMR).[6]
+
+BMR may be measured by gas analysis through either direct or indirect 
+calorimetry, though a rough estimation can be acquired through an equation 
+using age, sex, height, and weight. Studies of energy metabolism using both 
+methods provide convincing evidence for the validity of the respiratory 
+quotient (RQ), which measures the inherent composition and utilization of 
+carbohydrates, fats and proteins as they are converted to energy substrate 
+units that can be used by the body as energy.
+
+"""
+
+class BasalMetabolicRate:
+    """Module to estimate basal metabolic rate according to the formulas provided in the reference url."""
+    
+    def __init__(self, MifflinSTJeor, HarrisBenedict, KatchMcArdle):
+        self.MifflinSTJeor= MifflinSTJeor
+        self.HarrisBenedict= HarrisBenedict
+        self.KatchMcArdle= KatchMcArdle
+    
+    #Mifflin ST Jeor Equation
+    class MifflinSTJeor:
+        """The Mifflin ST Jeor equations for estimating basal metabolic rate. WOMEN calories/day = 10 x Weight(kg) + 6.25 x height(cm) - 5 x age(y) + 161, MEN calories/day = 10 x Weight(kg) + 6.25 x height(cm) - 5 x age(y) + 5"""
+        
+        def __init__(self,weight_kg, height_cm, age):
+            self.weight_kg = weight_kg
+            self.height_cm = height_cm
+        # MEN calories/day = 10 x Weight(kg) + 6.25 x height(cm) - 5 x age(y) + 5
+        #Mifflin ST Jeor Equation
+        
+        WOMEN = lambda x,y,z : 10*x + 6.25*y -5*z + 161
+        MEN = lambda x,y,z : 10*x + 6.25*y - 5*z + 5
+        
+        def men(weight_kg, height_cm, age):
+            """This Function estimates basal metabolic rate for men"""
+            BMR= round(10*weight_kg + 6.25*height_cm - 5*age + 5)
+            print("{} kcal/day".format(BMR))
+            return BMR
+    
+    
+        # WOMEN calories/day = 10 x Weight(kg) + 6.25 x height(cm) - 5 x age(y) + 161
+        def women(weight_kg, height_cm, age):
+            """This Function estimates basal metabolic rate for women"""
+            BMR= round(10*weight_kg + 6.25*height_cm - 5*age + 161)
+            print("{} kcal/day".format(BMR))
+            return BMR
+       
+     
+    class HarrisBenedict:
+        """The Harris-Benedict equation to estimate basal metabolic rate.
+        Women: BMR = 447.593 + (9.247 x weight in kg) + (3.098 x height in cm) - (4.330 x age in years)
+        Men:  BMR = 88.362 + (13.397 x weight in kg) + (4.799 x height in cm) - (5.677 x age in years)
+        """
+        
+    
+        def __init__(self, age, weight_kg, height_cm):
+            self.age = age
+            self.weight_kg = weight_kg
+            self.height_cm = height_cm
+    
+    
+        WOMEN= lambda x,y,z: round(447.593 + 9.247*x + 3.098*y - 4.330*z, 2)
+    
+    
+        MEN= lambda x,y,z: round(88.362 + 13.397*x + 4.799*y - 5.677*z, 2)
+        
+    
+        def women(weight_kg, height_cm, age):
+            """This Function estimates basal metabolic rate for women"""
+            BMR = round(447.593 + 9.247*weight_kg + 3.098*height_cm - 4.330*age)
+            print("{} kcal/day".format(BMR))
+            return BMR
+        
+        
+        def men(weight_kg, height_cm, age):
+            """This Function estimates basal metabolic rate for men"""
+            BMR = round(88.362 + 13.397*weight_kg + 4.799*height_cm - 5.677*age)
+            print("{} kcal/day".format(BMR))
+            return BMR
+    
+        
+    class KatchMcArdle:
+        """The Katch-Mcardle and Cunningham equations yeild the lean body mass and estimates basal metabolic rate"""
+        
+        def __init__(self,weight_kg, body_fat_percent,lean_body_mass_kg):
+            self.weight_kg = weight_kg
+            self.body_fat_percent = body_fat_percent
+            self.lean_body_mass_kg = lean_body_mass_kg
+        
+        
+        def leanbodymass(weight_kg, body_fat_percent):
+            """This Function estimates lean body mass by weight in kg and body fat percent."""
+            LBM = round(weight_kg* (1-(body_fat_percent/100)))
+            return LBM
+        
+        def bmr(lean_body_mass_kg):
+            """This Function"""
+            BMR = round(370 +(9.7976*lean_body_mass_kg*2.2))
+            return BMR
+
+
+
+class JacksonPollock:
+    
+    def __init__(self, BodyFatPercent, BodyDensity):
+        self.JacksonPollock= JacksonPollock
+        self.BodyDensity= BodyDensity
+    
+    class BodyFatPercent:
+        """tThis class can be used to estimate body fat percent."""
+        def __init__(self, men, women):
+            self.men= men
+            self.women= women
+            
+        
+        def men(age, abdominal_skinfold, triceps_skinfold, thigh_skinfold , suprailiac_skinfold):
+            """this function estimates body fat percentage with the four site skinfold method"""
+            SKIN_FOLD_SUM= sum(abdominal_skinfold, triceps_skinfold, thigh_skinfold, suprailiac_skinfold)
+            PERCENTBODYFAT  = (0.29288 * SKIN_FOLD_SUM) - (0.0005 * SKIN_FOLD_SUM**2 ) + (0.15845 * age) - 5.76377
+            return PERCENTBODYFAT
+        
+        
+        def women(age, abdominal_skinfold, triceps_skinfold, thigh_skinfold , suprailiac_skinfold):
+            """this function estimates body fat percentage with the four site skinfold method"""
+            SKIN_FOLD_SUM= sum(abdominal_skinfold, triceps_skinfold, thigh_skinfold, suprailiac_skinfold)
+            PERCENTBODYFAT  = (0.29669*SKIN_FOLD_SUM) - (0.00043*SKIN_FOLD_SUM**2) + (0.02963*age) + 1.4072
+            return PERCENTBODYFAT
+    
+    
+    
+    class BodyDensity:
+    
+        def __init__(self, men, women):
+            self.men= men
+            self.women = women
+        
+        
+        class men:
+    
+            def __init__(self, girthmeasurements, three_site_skinfold, seven_site_skinfold):
+                self.girthmeasurements = girthmeasurements
+                self.three_site_skinfold = three_site_skinfold
+                self.seven_site_skinfold = seven_site_skinfold
+                
+            
+            def girthmeasurements(age, chest_skin_fold_mm, abdomen_skin_fold_mm, thigh_skin_fold_mm, waist_circ_m, forearm_circ_m):
+                SKIN_FOLD_SUM = sum(chest_skin_fold_mm, abdomen_skin_fold_mm, thigh_skin_fold_mm)
+                BODY_DENSITY = (1.0990750-0.0008209)*SKIN_FOLD_SUM+0.0000026*SKIN_FOLD_SUM**2-0.0002017*age-0.005675*waist_circ_m+0.018586*forearm_circ_m
+                return BODY_DENSITY
+            
+            
+            def three_site_skinfold(age, chest_skin_fold_mm, tricep_skin_fold_mm, subscapular_skin_fold_mm):
+                """3-Site Skinfold Equation. 
+                Body Density = 1.1125025 - (0.0013125 x sum of chest, triceps and subscapular skinfolds in mm ) + (0.0000055 x square of the sum of chest, triceps and subscapular) - (0.000244 x age)                
+                """
+                SKIN_FOLD_SUM = sum(chest_skin_fold_mm, tricep_skin_fold_mm, subscapular_skin_fold_mm)
+                BODY_DENSITY = 1.1125025-(0.0013125*SKIN_FOLD_SUM)+(0.0000055*SKIN_FOLD_SUM**2)-(0.000244*age)
+                return BODY_DENSITY
+            
+            
+            def seven_site_skinfold(age,chest, axilla, tricep, subscapular, abdominal, suprailiac, thigh):
+                """
+                7-Site Skinfold Equation
+                skinfold sites (measured in mm) are: Chest, Axilla, Tricep, Subscapular, Abdominal, Suprailiac, Thigh
+                Body Density = 1.112 - (0.00043499 x sum of skinfolds) + (0.00000055 x square of the sum of skinfold sites) - (0.00028826 x age)
+                """
+                SKIN_FOLD_SUM = sum(chest, axilla, tricep, subscapular, abdominal, suprailiac, thigh)
+                BODY_DENSITY = 1.112 - (0.00043499*SKIN_FOLD_SUM) + (0.00000055*SKIN_FOLD_SUM**2) - (0.00028826*age)
+                return BODY_DENSITY
+
+
+                
+        class women:
+            """
+            This Class uses three methods to estimate body density           
+            """
+            
+    
+            def __init__(self, girthmeasurements,three_site_skinfold,seven_site_skinfold):
+                self.girthmeasurements = girthmeasurements
+                self.three_site_skinfold = three_site_skinfold
+                self.seven_site_skinfold = seven_site_skinfold
+            def girthmeasurements(age, tricep_skin_fold_mm, suprailiac_skin_fold_mm, thigh_skin_fold_mm, gluteal_circ_cm):
+                """
+                Females
+                Equation that includes girth measurements
+                Body Density = 1. 1470292 - 0.0009376 (X3) + 0.0000030 (X3)2 - 0.0001156 (X4) - 0.0005839 (X5), Where: X3 = sum of triceps, thigh and suprailiac skinfolds, in mm, X4 = age in years and X5 = gluteal circumference in cm.
+
+                """
+                SKIN_FOLD_SUM = sum(tricep_skin_fold_mm, suprailiac_skin_fold_mm, thigh_skin_fold_mm)
+                BODY_DENSITY = round(1.1470292 - 0.0009376 *SKIN_FOLD_SUM + 0.0000030*SKIN_FOLD_SUM**2 - 0.0001156*age - 0.0005839*gluteal_circ_cm)
+                #(X5), Where: X3 = sum of triceps, thigh and suprailiac skinfolds, in mm, X4 = age in years and X5 = gluteal circumference in cm.
+                return BODY_DENSITY
+            
+            
+            def three_site_skinfold(age, tricep_skin_fold_mm, suprailiac_skin_fold_mm, thigh_skin_fold_mm):
+                """3-Site Skinfold Equation
+                Body Density = 1.0994921 - (0.0009929 x sum of triceps, thigh and suprailiac skinfolds) + (0.0000023 x square of the sum of triceps, thigh and suprailiac skinfolds) - (0.0001392 x age)
+                (reference: Jackson, et al. (1980), based on a sample aged 18-55)
+                """
+                SKIN_FOLD_SUM = sum(tricep_skin_fold_mm, suprailiac_skin_fold_mm, thigh_skin_fold_mm)
+                BODY_DENSITY = 1.0994921 - (0.0009929 * SKIN_FOLD_SUM) + (0.0000023 * SKIN_FOLD_SUM**2) - (0.0001392 * age)
+                return BODY_DENSITY
+            
+            
+            def seven_site_skinfold(age,chest, axilla, tricep, subscapular, abdominal, suprailiac, thigh):
+                """
+                7-Site Skinfold Equation
+                skinfold sites (measured in mm) are: Chest, Axilla, Tricep, Subscapular, Abdominal, Suprailiac, Thigh
+                Body Density = 1.112 - (0.00043499 x sum of skinfolds) + (0.00000055 x square of the sum of skinfold sites) - (0.00028826 x age)
+                """
+                SKIN_FOLD_SUM = sum(chest, axilla, tricep, subscapular, abdominal, suprailiac, thigh)
+                BODY_DENSITY = 1.112 - (0.00043499*SKIN_FOLD_SUM) + (0.00000055*SKIN_FOLD_SUM**2) - (0.00028826*age)
+                return BODY_DENSITY
+
+            
+            
+class BodyAdiposityIndex:
+    """
+    The body adiposity index (BAI) is a method of estimating the amount of body fat in humans. 
+    The BAI is calculated without using body weight, 
+    unlike the body mass index (BMI). Instead, 
+    it uses the size of the hips compared to the person's height.
+    """
+    def __init__(self,hip_circ_m, height_m ):
+        self.hip_circ_m = hip_circ_m
+        self.height_m = height_m
+    def BAI(hip_circ_m, height_m ):
+        BAI = ((100*hip_circ_m)/height_m*height_m**2)-18
+        return BAI
+        
+               
+            
+            
+            
+            
