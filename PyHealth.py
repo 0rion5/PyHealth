@@ -214,6 +214,5 @@ try:
         initialize()
         main()
 except KeyboardInterrupt:
-    
-    
-   
+    import sys
+    sys.exit()
